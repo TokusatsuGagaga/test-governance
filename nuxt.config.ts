@@ -1,7 +1,7 @@
 import { defineNuxtConfig } from 'nuxt'
-// import webpack from 'webpack'
-import inject from '@rollup/plugin-inject'
-import commonjs from '@rollup/plugin-commonjs'
+import webpack from 'webpack'
+// import inject from '@rollup/plugin-inject'
+// import commonjs from '@rollup/plugin-commonjs'
 
 // const isDev = process.env.NODE_ENV === 'development'
 
@@ -43,33 +43,33 @@ export default defineNuxtConfig({
       },
     },
   },
-  // builder: isDev ? 'vite' : 'webpack',
+  builder: 'webpack',
   // ...isDev
   //   ? {
-  vite: {
-    plugins: [
-      commonjs(),
-      inject({
-        Buffer: ['buffer', 'Buffer'],
-      }),
-    ],
-    optimizeDeps: {
-      include: [
-        'buffer',
-      ],
-    },
-  },
-  // }
-  // : {
-  //   webpack: {
-  //     plugins: [
-  //       new webpack.ProvidePlugin({
-  //         Buffer: ['buffer', 'Buffer'],
-  //       }),
-  //       new webpack.ProvidePlugin({
-  //         process: 'process/browser',
-  //       }),
+  // vite: {
+  //   plugins: [
+  //     commonjs(),
+  //     inject({
+  //       Buffer: ['buffer', 'Buffer'],
+  //     }),
+  //   ],
+  //   optimizeDeps: {
+  //     include: [
+  //       'buffer',
   //     ],
   //   },
+  // },
+  // }
+  // : {
+  webpack: {
+    plugins: [
+      new webpack.ProvidePlugin({
+        Buffer: ['buffer', 'Buffer'],
+      }),
+      new webpack.ProvidePlugin({
+        process: 'process/browser',
+      }),
+    ],
+  },
   // },
 })
