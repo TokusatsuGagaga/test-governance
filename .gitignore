@@ -91,3 +91,4 @@ dist
 
 # pwa
 sw.*
+.vercel
