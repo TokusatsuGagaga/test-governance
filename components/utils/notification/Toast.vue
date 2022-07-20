@@ -1,8 +1,13 @@
 <template>
   <div
     ref="root"
-    :class="$style.container"
-    class="grid gap-10 grid-cols-auto-1fr p-10 pb-20 bg-grey-300 rounded-5 shadow after:text-primary"
+    :class="[
+      $style.container,
+      {
+        'pb-20': title && !message,
+      }
+    ]"
+    class="grid gap-10 grid-cols-auto-1fr p-10 bg-grey-300 rounded-5 shadow after:text-primary"
     @mouseenter="isHovering = true"
     @mouseleave="isHovering = false"
   >

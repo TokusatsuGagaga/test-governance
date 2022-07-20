@@ -27,10 +27,12 @@
 import type { NotificationBannerProps } from '@/composables/useNotificationBanner'
 import type { NotificationToastProps } from '@/composables/useNotificationToast'
 import { useDeviceStore } from '@/stores/device'
+import { useProposalsStore } from '@/stores/proposals'
 import BrowserDetector from '@/assets/scripts/detectors/BrowserDetector.class'
 import DeviceDetector from '@/assets/scripts/detectors/DeviceDetector.class'
 
 const { setBrowser, setDevice } = useDeviceStore()
+const { fetchProposals } = useProposalsStore()
 const { bus, events } = useEventsBus()
 const { listenIconex } = useIconexListener()
 const {
@@ -47,11 +49,12 @@ watch(() => bus.value.get(events.POPUP_CLOSE), POPUP_CLOSE_CURRENT)
 watch(() => bus.value.get(events.POPUP_GUARD), POPUP_HANDLE_GUARD)
 watch(() => bus.value.get(events.POPUP_ACTION), POPUP_CALL_ACTION)
 
-onBeforeMount(() => {
+onBeforeMount(async () => {
   const { browser } = new BrowserDetector()
   const checks = new DeviceDetector()
   setBrowser(browser.toLowerCase())
   setDevice(checks)
   listenIconex()
+  await fetchProposals()
 })
 </script>
