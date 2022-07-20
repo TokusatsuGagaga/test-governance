@@ -3,7 +3,7 @@ import webpack from 'webpack'
 import inject from '@rollup/plugin-inject'
 import commonjs from '@rollup/plugin-commonjs'
 
-const isDev = process.env.NODE_ENV === 'development'
+const isDev = process.env.NODE_ENV !== 'development'
 
 export default defineNuxtConfig({
   publicRuntimeConfig: {
