@@ -4,69 +4,39 @@
     class="grid gap-20"
     :class="{ [$style.hasErrors]: errors && errors.length }"
   >
-    <h2 v-if="label">
-      {{ label }}
-    </h2>
-    <div
-      class="relative grid items-center bg-grey-000 rounded-15 border-1 border-primary transition-border duration-100"
-      :class="[
-        isFocused ? 'border-opacity-100' : 'border-opacity-0',
-        {
-          'grid-cols-auto-1fr-auto px-24': type === 'number',
-        },
-      ]"
-    >
-      <button
-        v-if="type === 'number'"
-        ref="buttonMinus"
-        class="grid place-items-center w-20 h-20 text-white bg-primary rounded-full"
-        @click="updateModel(Math.max(0, Number(model) - 1))"
+    <div class="grid gap-10 grid-cols-1fr-auto">
+      <h2
+        v-if="label"
+        class="text-white typo-title-m"
       >
-        <UtilsIcon
-          name="Math/Minus"
-          class="w-16 h-16"
-        />
-      </button>
-      <textarea
-        v-if="type === 'textarea'"
-        ref="input"
-        v-model="model"
-        :class="$style.input"
-        :placeholder="placeholder"
-        :rows="rows"
-        :cols="cols"
-        @focus="isFocused = true"
-        @blur="onBlur"
-      />
-      <input
-        v-else
-        ref="input"
-        v-model="model"
-        :class="[
-          $style.input,
-          {
-            'text-center': type === 'number',
-          },
-        ]"
-        :type="type"
-        :placeholder="placeholder"
-        :min="min"
-        :max="max"
-        @focus="isFocused = true"
-        @blur="onBlur"
+        {{ label }}
+      </h2>
+      <span
+        v-if="tag"
+        class="typo-text-regular"
       >
-      <button
-        v-if="type === 'number'"
-        ref="buttonPlus"
-        class="grid place-items-center w-20 h-20 text-white bg-primary rounded-full"
-        @click="updateModel(Math.min(max, Number(model) + 1))"
-      >
-        <UtilsIcon
-          name="Math/Plus"
-          class="w-16 h-16"
-        />
-      </button>
+        {{ tag }}
+      </span>
     </div>
+    <textarea
+      v-if="type === 'textarea'"
+      v-model="model"
+      :class="$style.input"
+      class="typo-paragraph"
+      :placeholder="placeholder"
+      :rows="rows"
+      :cols="cols"
+    />
+    <input
+      v-else
+      v-model="model"
+      :class="$style.input"
+      class="typo-paragraph"
+      :type="type"
+      :placeholder="placeholder"
+      :min="min"
+      :max="max"
+    >
   </label>
 </template>
 
@@ -107,6 +77,7 @@ type Emits = {
 type Props = {
   modelValue?: ModelValue
   label?: string
+  tag?: string
   type?: FormType
   placeholder?: string
   errors: ErrorObject[]
@@ -121,6 +92,7 @@ const emit = defineEmits<Emits>()
 const props = withDefaults(defineProps<Props>(), {
   modelValue: null,
   label: null,
+  tag: null,
   type: 'text',
   placeholder: null,
   rows: 8,
@@ -128,11 +100,6 @@ const props = withDefaults(defineProps<Props>(), {
   min: null,
   max: null,
 })
-
-const input = ref<HTMLInputElement | null>(null)
-const buttonMinus = ref<EventTarget | null>(null)
-const buttonPlus = ref<EventTarget | null>(null)
-const isFocused = ref<boolean>(false)
 
 const model = computed<ModelValue>({
   get() {
@@ -149,23 +116,14 @@ const model = computed<ModelValue>({
     }
   },
 })
-
-const updateModel = (value: number): void => {
-  model.value = value
-  input.value.focus()
-}
-
-const onBlur = (event: FocusEvent) => {
-  if (![buttonMinus.value, buttonPlus.value].includes(event.relatedTarget)) isFocused.value = false
-}
 </script>
 
 <style lang="scss" module>
 .hasErrors .input {
-  @apply border-primary;
+  @apply border-error hover:border-error active:border-error focus:border-error;
 }
 
 .input {
-  @apply relative px-24 py-16 text-grey-600 typo-section bg-transparent placeholder:text-grey-400;
+  @apply px-24 py-20 text-white placeholder:text-grey-100 bg-transparent border-1 border-grey-200 rounded-20 transition-border duration-200 hover:border-primary active:border-primary focus:border-primary;
 }
 </style>

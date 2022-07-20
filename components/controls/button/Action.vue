@@ -76,20 +76,13 @@ type Version =
   | 'info-border'
   | 'neutral-border'
 
-type Size =
-  | 'sm'
-  | 'md'
-  | 'lg'
-
 type Props = {
   version?: Version
-  size?: Size
   to?: NuxtLinkProps
   target?: '_self' | '_blank' | '_parent' | '_top'
   type?: 'submit' | 'reset' | 'button'
   isImportant?: boolean
   copiedText?: string
-  isLocked?: boolean
 }
 
 const props = withDefaults(defineProps<Props>(), {
@@ -99,7 +92,6 @@ const props = withDefaults(defineProps<Props>(), {
   type: null,
   isImportant: false,
   copiedText: '',
-  isLocked: false,
 })
 
 const { copyText } = useCopyText()

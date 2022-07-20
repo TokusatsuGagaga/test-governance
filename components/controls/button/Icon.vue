@@ -40,7 +40,7 @@
     }"
   >
     <UtilsIcon
-      :name="icon"
+      :name="name"
       class="relative w-20 h-20"
     />
   </component>
@@ -64,7 +64,7 @@ type Props = {
   to?: NuxtLinkProps
   target?: '_self' | '_blank' | '_parent' | '_top'
   type?: 'submit' | 'reset' | 'button'
-  icon: IconsNames
+  name: IconsNames
 }
 
 withDefaults(defineProps<Props>(), {

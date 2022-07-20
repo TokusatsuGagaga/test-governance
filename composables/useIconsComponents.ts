@@ -20,7 +20,6 @@ const icons = {
   'State/Warning': markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/State/Warning.vue'))),
   Copy: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Copy.vue'))),
   Cross: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Cross.vue'))),
-  Dot: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Dot.vue'))),
   Login: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Login.vue'))),
   Logout: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Logout.vue'))),
   Menu: markRaw(defineAsyncComponent(() => import('@/assets/scripts/icons/Menu.vue'))),
