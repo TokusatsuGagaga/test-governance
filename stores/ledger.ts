@@ -9,8 +9,6 @@ import { useUserStore } from '@/stores/user'
 const { iconNetwork } = useRuntimeConfig()
 const isTestnet = iconNetwork === 'testnet'
 const url = isTestnet ? 'https://sejong.net.solidwallet.io/' : 'https://ctz.solidwallet.io/'
-const provider = new IconService.HttpProvider(`${url}api/v3`)
-const iconService = new IconService(provider)
 
 type LedgerStatus = {
   isFetching: boolean
@@ -29,6 +27,9 @@ type LedgerAddressData = {
 type LedgerAddressesList = LedgerAddressData[]
 
 export const useLedgerStore = defineStore('ledger-store', () => {
+  const provider = new IconService.HttpProvider(`${url}api/v3`)
+  const iconService = new IconService(provider)
+
   const { emit, events } = useEventsBus()
   const { notify } = useNotificationToast()
   const { loginUser } = useUserStore()
