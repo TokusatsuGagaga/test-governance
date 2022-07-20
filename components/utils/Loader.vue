@@ -16,7 +16,9 @@
 
 <script setup lang="ts">
 type Sizes = 20 | 40
+
 type Thicknesses = 1 | 2 | 4
+
 type Props = {
   size?: Sizes
   thickness?: Thicknesses

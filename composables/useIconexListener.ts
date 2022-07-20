@@ -36,7 +36,7 @@ type CancelParams = {
 }
 
 type RpcParams = {
-  payload?: Record<string, unknown | never>
+  payload?: string
   error?: string
 }
 

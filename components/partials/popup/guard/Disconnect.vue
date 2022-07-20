@@ -1,28 +1,18 @@
 <template>
-  <PartialsPopup
-    size="s"
-    require-button
-  >
+  <PartialsPopup>
     <template #header>
       Log out
     </template>
     <template #body>
       <div class="grid gap-10">
-        <ControlsButtonAction
-          version="secondary"
-          :copied-text="address"
-        >
+        <ControlsButtonAction version="secondary">
           {{ truncatedAddress }}
-          <UtilsIcon
-            class="w-20 h-20 text-grey-100"
-            name="Copy"
-          />
         </ControlsButtonAction>
         <ControlsButtonAction
-          version="error-bg"
+          version="error"
           @click="logoutOnClick"
         >
-          Log out
+          Disconnect
         </ControlsButtonAction>
       </div>
     </template>
@@ -33,9 +23,9 @@
 import { storeToRefs } from 'pinia'
 import { useUserStore } from '@/stores/user'
 
-const userStore = useUserStore()
-const { address, truncatedAddress } = storeToRefs(userStore)
-const { logoutUser } = userStore
+const { truncatedAddress } = storeToRefs(useUserStore())
+
+const { logoutUser } = useUserStore()
 const { emit, events } = useEventsBus()
 
 const logoutOnClick = (): void => {

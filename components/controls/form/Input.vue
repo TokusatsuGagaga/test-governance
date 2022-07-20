@@ -1,39 +1,72 @@
 <template>
   <!-- TODO: handle errors UI -->
   <label
-    class="grid gap-20"
+    class="grid gap-12 w-full xxs:w-320"
     :class="{ [$style.hasErrors]: errors && errors.length }"
   >
-    <div class="grid gap-10 grid-cols-1fr-auto">
-      <h2 class="text-white typo-title-m">
-        {{ label }}
-      </h2>
-      <span
-        v-if="tag"
-        class="typo-text-regular"
-      >
-        {{ tag }}
-      </span>
-    </div>
-    <textarea
-      v-if="type === 'textarea'"
-      v-model="model"
-      :class="$style.input"
-      class="typo-paragraph"
-      :placeholder="placeholder"
-      :rows="rows"
-      :cols="cols"
-    />
-    <input
-      v-else
-      v-model="model"
-      :class="$style.input"
-      class="typo-paragraph"
-      :type="type"
-      :placeholder="placeholder"
-      :min="min"
-      :max="max"
+    <h2 v-if="label">
+      {{ label }}
+    </h2>
+    <div
+      class="relative grid items-center bg-grey-000 rounded-15 border-1 border-primary transition-border duration-100"
+      :class="[
+        isFocused ? 'border-opacity-100' : 'border-opacity-0',
+        {
+          'grid-cols-auto-1fr-auto px-24': type === 'number',
+        },
+      ]"
     >
+      <button
+        v-if="type === 'number'"
+        ref="buttonMinus"
+        class="grid place-items-center w-20 h-20 text-white bg-primary rounded-full"
+        @click="updateModel(Math.max(0, Number(model) - 1))"
+      >
+        <UtilsIcon
+          name="Math/Minus"
+          class="w-16 h-16"
+        />
+      </button>
+      <textarea
+        v-if="type === 'textarea'"
+        ref="input"
+        v-model="model"
+        :class="$style.input"
+        :placeholder="placeholder"
+        :rows="rows"
+        :cols="cols"
+        @focus="isFocused = true"
+        @blur="onBlur"
+      />
+      <input
+        v-else
+        ref="input"
+        v-model="model"
+        :class="[
+          $style.input,
+          {
+            'text-center': type === 'number',
+          },
+        ]"
+        :type="type"
+        :placeholder="placeholder"
+        :min="min"
+        :max="max"
+        @focus="isFocused = true"
+        @blur="onBlur"
+      >
+      <button
+        v-if="type === 'number'"
+        ref="buttonPlus"
+        class="grid place-items-center w-20 h-20 text-white bg-primary rounded-full"
+        @click="updateModel(Math.min(max, Number(model) + 1))"
+      >
+        <UtilsIcon
+          name="Math/Plus"
+          class="w-16 h-16"
+        />
+      </button>
+    </div>
   </label>
 </template>
 
@@ -65,14 +98,15 @@ type FormType =
   | 'url'
   | 'week'
 
+type ModelValue = string | number
+
 type Emits = {
-  (event: 'update:modelValue', value: string): void
+  (event: 'update:modelValue', value: ModelValue): void
 }
 
 type Props = {
-  modelValue?: string
-  label: string
-  tag?: string
+  modelValue?: ModelValue
+  label?: string
   type?: FormType
   placeholder?: string
   errors: ErrorObject[]
@@ -85,33 +119,53 @@ type Props = {
 const emit = defineEmits<Emits>()
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: '',
-  label: null,
-  tag: null,
+  modelValue: null,
   type: 'text',
+  label: null,
   placeholder: null,
   rows: 8,
   cols: null,
-  min: null,
-  max: null,
+  min: -Infinity,
+  max: Infinity,
 })
 
-const model = computed<string>({
+const input = ref<HTMLInputElement | null>(null)
+const buttonMinus = ref<EventTarget | null>(null)
+const buttonPlus = ref<EventTarget | null>(null)
+const isFocused = ref<boolean>(false)
+
+const model = computed<ModelValue>({
   get() {
     return props.modelValue
   },
   set(value) {
-    emit('update:modelValue', value)
+    switch (props.type) {
+      case 'number':
+        emit('update:modelValue', Number(value))
+        break
+      default:
+        emit('update:modelValue', value)
+        break
+    }
   },
 })
+
+const updateModel = (value: number): void => {
+  model.value = value
+  input.value.focus()
+}
+
+const onBlur = (event: FocusEvent) => {
+  if (![buttonMinus.value, buttonPlus.value].includes(event.relatedTarget)) isFocused.value = false
+}
 </script>
 
 <style lang="scss" module>
 .hasErrors .input {
-  @apply border-error hover:border-error active:border-error focus:border-error;
+  @apply border-primary;
 }
 
 .input {
-  @apply px-24 py-20 text-white placeholder:text-grey-100 bg-transparent border-1 border-grey-200 rounded-20 transition-border duration-200 hover:border-primary active:border-primary focus:border-primary;
+  @apply relative px-24 py-16 text-grey-600 typo-section bg-transparent placeholder:text-grey-400;
 }
 </style>

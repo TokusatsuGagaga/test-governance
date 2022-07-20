@@ -1,34 +1,49 @@
 <template>
   <div
     ref="root"
-    :class="$style.container"
-    class="grid gap-10 grid-cols-auto-1fr p-10 bg-grey-300 rounded-5 shadow after:text-primary"
+    :class="[
+      $style.container,
+      {
+        'text-success': type === 'success',
+        'text-warning': type === 'warning',
+        'text-error': type === 'error',
+        'text-info': type === 'info',
+        'text-grey-400': !type,
+      },
+    ]"
+    class="grid gap-12 grid-cols-auto-1fr-auto items-center p-16 bg-white rounded-15 shadow"
     @mouseenter="isHovering = true"
     @mouseleave="isHovering = false"
   >
-    <button
-      class="grid place-items-center w-20 h-20"
-      @click="closeNotificationToast"
-    >
+    <div class="grid place-items-center w-20 h-20 rounded-full bg-current">
       <UtilsIcon
-        name="Cross"
-        class="w-20 h-20"
+        :name="notificationIcon"
+        class="w-20 h-20 text-white"
       />
-    </button>
-    <div class="grid gap-10">
+    </div>
+    <div class="grid gap-2">
       <h3
         v-if="title"
-        class="typo-title-s"
+        class="text-current text-14 font-medium"
       >
         {{ title }}
       </h3>
       <p
         v-if="message"
-        class="typo-paragraph"
+        class="text-grey-400 text-12 font-regular"
       >
         {{ message }}
       </p>
     </div>
+    <button
+      class="grid place-items-center w-20 h-20 text-grey-400 transition-color hover:text-current"
+      @click="closeNotificationToast"
+    >
+      <UtilsIcon
+        name="Cross"
+        class="w-full h-full"
+      />
+    </button>
   </div>
 </template>
 

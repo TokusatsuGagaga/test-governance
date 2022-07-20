@@ -2,6 +2,8 @@ const plugin = require('tailwindcss/plugin')
 
 const { shareEntries, fractions, combineRules } = require('./helpers')
 
+const color = process.env.APP_COLOR
+
 module.exports = {
   theme: {
     // Tailwind Utility : xs:, s, etc.
@@ -21,21 +23,29 @@ module.exports = {
       current: 'currentColor',
       inherit: 'inherit',
 
+      black: '#111111',
       white: '#FFFFFF',
-      primary: '#0890FE',
+
+      primary: color,
+      craft: '#0C9D90',
 
       grey: {
-        default: '#889DBC',
-        100: '#889DBC',
-        200: '#3A3D5D',
-        300: '#252846',
-        400: '#1C1F3E',
+        '000': '#F9FAFB',
+        100: '#F3F4F6',
+        200: '#E5E7EB',
+        300: '#D2D5DA',
+        400: '#9CA3AF',
+        500: '#6D7280',
+        600: '#4B5563',
+        700: '#374151',
+        800: '#1F2937',
+        900: '#111827',
       },
 
-      success: '#52D5BA',
-      warning: '#FFAF2A',
-      error: '#FF4267',
-      info: '#0890FE',
+      success: '#22C55E',
+      warning: '#EAB308',
+      error: '#EF4444',
+      info: '#3B82F6',
     },
     // Tailwind Utility : p-, m- etc.
     spacing: {
@@ -237,8 +247,6 @@ module.exports = {
       10: '10.0px',
       15: '15.0px',
       20: '20.0px',
-      25: '25.0px',
-      30: '30.0px',
     },
     // Tailwind Utility : border-, border-t- etc.
     borderWidth: {
@@ -445,6 +453,66 @@ module.exports = {
         '.max-h-screen': { 'max-height': '100vh' },
         '.max-w-screen': { 'max-width': '100vw' },
       }, ['responsive'])
+
+      addUtilities({
+        '.typo-h1': {
+          'font-weight': '700',
+          'font-size': '30px',
+          'line-height': '36px',
+        },
+        '.typo-h2': {
+          'font-weight': '600',
+          'font-size': '16px',
+          'line-height': '19px',
+        },
+        '.typo-section': {
+          'font-weight': '400',
+          'font-size': '14px',
+          'line-height': '22px',
+        },
+        '.typo-body': {
+          'font-weight': '400',
+          'font-size': '13px',
+          'line-height': '16px',
+        },
+        '.typo-body-bold': {
+          'font-weight': '600',
+          'font-size': '13px',
+          'line-height': '16px',
+        },
+        '.typo-ui-l': {
+          'font-weight': '600',
+          'font-size': '14px',
+          'line-height': '22px',
+        },
+        '.typo-ui-m': {
+          'font-weight': '600',
+          'font-size': '12px',
+          'line-height': '22px',
+        },
+        '.typo-ui-s': {
+          'font-weight': '600',
+          'font-size': '10px',
+          'line-height': '18px',
+        },
+        '.typo-capital': {
+          'font-weight': '500',
+          'font-size': '12px',
+          'line-height': '15px',
+          'letter-spacing': '0.02em',
+          'text-transform': 'uppercase',
+        },
+        '.typo-caption': {
+          'font-weight': '400',
+          'font-size': '11px',
+          'line-height': '13px',
+        },
+        '.typo-caption-semibold': {
+          'font-weight': '600',
+          'font-size': '11px',
+          'line-height': '13px',
+        },
+      })
     }),
   ],
   content: [
