@@ -1,5 +1,5 @@
 import { defineNuxtConfig } from 'nuxt'
-import webpack from 'webpack'
+// import webpack from 'webpack'
 import inject from '@rollup/plugin-inject'
 import commonjs from '@rollup/plugin-commonjs'
 
