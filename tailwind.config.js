@@ -2,8 +2,6 @@ const plugin = require('tailwindcss/plugin')
 
 const { shareEntries, fractions, combineRules } = require('./helpers')
 
-const color = process.env.APP_COLOR
-
 module.exports = {
   theme: {
     // Tailwind Utility : xs:, s, etc.
@@ -25,8 +23,7 @@ module.exports = {
 
       black: '#111111',
       white: '#FFFFFF',
-
-      primary: color,
+      primary: '#0890FE',
       craft: '#0C9D90',
 
       grey: {
@@ -42,10 +39,10 @@ module.exports = {
         900: '#111827',
       },
 
-      success: '#22C55E',
-      warning: '#EAB308',
-      error: '#EF4444',
-      info: '#3B82F6',
+      success: '#52D5BA',
+      warning: '#FFAF2A',
+      error: '#FF4267',
+      info: '#0890FE',
     },
     // Tailwind Utility : p-, m- etc.
     spacing: {
@@ -247,6 +244,8 @@ module.exports = {
       10: '10.0px',
       15: '15.0px',
       20: '20.0px',
+      25: '25.0px',
+      30: '30.0px',
     },
     // Tailwind Utility : border-, border-t- etc.
     borderWidth: {
