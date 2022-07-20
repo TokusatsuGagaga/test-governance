@@ -17,7 +17,7 @@
             name="Math/Plus"
             :to="{ name: 'create' }"
           />
-          <!-- <ControlsButtonAction
+          <ControlsButtonAction
             v-if="!isLoggedIn"
             @click="emit(events.POPUP_GUARD)"
           >
@@ -36,7 +36,7 @@
               name="Logout"
               @click="emit(events.POPUP_GUARD)"
             />
-          </template> -->
+          </template>
         </div>
       </client-only>
     </Container>
