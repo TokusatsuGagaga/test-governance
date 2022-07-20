@@ -121,32 +121,32 @@
 </template>
 
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
-// import { useUserStore } from '@/stores/user'
-// import type { IconsNames } from '@/composables/useIconsComponents'
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import type { IconsNames } from '@/composables/useIconsComponents'
 
-// enum HEADING {
-//   PROTOCOL_PROPOSALS = 'protocol-proposals',
-//   VOTE_INFORMATION = 'vote-information',
-//   NEW_PROPOSAL = 'new-proposal',
-// }
+enum HEADING {
+  PROTOCOL_PROPOSALS = 'protocol-proposals',
+  VOTE_INFORMATION = 'vote-information',
+  NEW_PROPOSAL = 'new-proposal',
+}
 
-// type SocialData = {
-//   name: string
-//   url: string
-//   icon: IconsNames
-// }
+type SocialData = {
+  name: string
+  url: string
+  icon: IconsNames
+}
 
-// const route = useRoute()
-// const createIsPreviewing = useState<boolean>('create-is-previewing')
+const route = useRoute()
+const createIsPreviewing = useState<boolean>('create-is-previewing')
 
-// const { isLoggedIn, address, truncatedAddress } = storeToRefs(useUserStore())
-// const { emit, events } = useEventsBus()
+const { isLoggedIn, address, truncatedAddress } = storeToRefs(useUserStore())
+const { emit, events } = useEventsBus()
 
-// const headingType = ref<HEADING>(null)
+const headingType = ref<HEADING>(null)
 const scrollRatio = ref<number>(0)
-// const activeTabIndex = ref<number>(0)
-// const tabsNames = ref<string[]>(['Proposals', 'New proposals'])
+const activeTabIndex = ref<number>(0)
+const tabsNames = ref<string[]>(['Proposals', 'New proposals'])
 
 // const socialsData = ref<SocialData[]>([
 //   { name: 'Discord', url: '', icon: 'Logo/Discord' },
