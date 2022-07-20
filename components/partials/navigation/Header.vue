@@ -17,7 +17,7 @@
             name="Math/Plus"
             :to="{ name: 'create' }"
           />
-          <ControlsButtonAction
+          <!-- <ControlsButtonAction
             v-if="!isLoggedIn"
             @click="emit(events.POPUP_GUARD)"
           >
@@ -36,7 +36,7 @@
               name="Logout"
               @click="emit(events.POPUP_GUARD)"
             />
-          </template>
+          </template> -->
         </div>
       </client-only>
     </Container>
@@ -45,14 +45,14 @@
         class="grid gap-20 items-center py-10 transition-height duration-400"
         :class="[
           $style.heading,
-          {
-            'grid-cols-1fr-auto-1fr': headingType === 'protocol-proposals',
-            '': headingType === 'vote-information',
-            'grid-flow-col justify-between': headingType === 'new-proposal',
-          }
+          // {
+          //   'grid-cols-1fr-auto-1fr': headingType === 'protocol-proposals',
+          //   '': headingType === 'vote-information',
+          //   'grid-flow-col justify-between': headingType === 'new-proposal',
+          // }
         ]"
       >
-        <template v-if="headingType === 'protocol-proposals'">
+        <!-- <template v-if="headingType === 'protocol-proposals'">
           <div class="grid gap-10 grid-flow-col items-center justify-start">
             <div
               class="w-auto h-full bg-grey-200 rounded-10 aspect-square transition-size duration-400"
@@ -114,76 +114,76 @@
           >
             {{ createIsPreviewing ? 'Edit' : 'Preview' }}
           </ControlsButtonAction>
-        </template>
+        </template> -->
       </div>
     </Container>
   </header>
 </template>
 
 <script setup lang="ts">
-import { storeToRefs } from 'pinia'
-import { useUserStore } from '@/stores/user'
-import type { IconsNames } from '@/composables/useIconsComponents'
+// import { storeToRefs } from 'pinia'
+// import { useUserStore } from '@/stores/user'
+// import type { IconsNames } from '@/composables/useIconsComponents'
 
-enum HEADING {
-  PROTOCOL_PROPOSALS = 'protocol-proposals',
-  VOTE_INFORMATION = 'vote-information',
-  NEW_PROPOSAL = 'new-proposal',
-}
+// enum HEADING {
+//   PROTOCOL_PROPOSALS = 'protocol-proposals',
+//   VOTE_INFORMATION = 'vote-information',
+//   NEW_PROPOSAL = 'new-proposal',
+// }
 
-type SocialData = {
-  name: string
-  url: string
-  icon: IconsNames
-}
+// type SocialData = {
+//   name: string
+//   url: string
+//   icon: IconsNames
+// }
 
-const route = useRoute()
-const createIsPreviewing = useState<boolean>('create-is-previewing')
+// const route = useRoute()
+// const createIsPreviewing = useState<boolean>('create-is-previewing')
 
-const { isLoggedIn, address, truncatedAddress } = storeToRefs(useUserStore())
-const { emit, events } = useEventsBus()
+// const { isLoggedIn, address, truncatedAddress } = storeToRefs(useUserStore())
+// const { emit, events } = useEventsBus()
 
-const headingType = ref<HEADING>(null)
+// const headingType = ref<HEADING>(null)
 const scrollRatio = ref<number>(0)
-const activeTabIndex = ref<number>(0)
-const tabsNames = ref<string[]>(['Proposals', 'New proposals'])
+// const activeTabIndex = ref<number>(0)
+// const tabsNames = ref<string[]>(['Proposals', 'New proposals'])
 
-const socialsData = ref<SocialData[]>([
-  { name: 'Discord', url: '', icon: 'Logo/Discord' },
-  { name: 'Github', url: '', icon: 'Logo/Github' },
-  { name: 'Twitter', url: '', icon: 'Logo/Twitter' },
-])
+// const socialsData = ref<SocialData[]>([
+//   { name: 'Discord', url: '', icon: 'Logo/Discord' },
+//   { name: 'Github', url: '', icon: 'Logo/Github' },
+//   { name: 'Twitter', url: '', icon: 'Logo/Twitter' },
+// ])
 
-const updateTab = (index: number): void => {
-  activeTabIndex.value = index
-}
+// const updateTab = (index: number): void => {
+//   activeTabIndex.value = index
+// }
 
-const onPageScroll = (): void => {
-  scrollRatio.value = Number(!window.scrollY)
-}
+// const onPageScroll = (): void => {
+//   scrollRatio.value = Number(!window.scrollY)
+// }
 
-watch(route, ({ name }) => {
-  switch (name) {
-    case 'proposal-uid':
-      headingType.value = HEADING.VOTE_INFORMATION
-      break
-    case 'create':
-      headingType.value = HEADING.NEW_PROPOSAL
-      break
-    default:
-      headingType.value = HEADING.PROTOCOL_PROPOSALS
-      break
-  }
-}, { immediate: true })
+// watch(route, ({ name }) => {
+//   switch (name) {
+//     case 'proposal-uid':
+//       headingType.value = HEADING.VOTE_INFORMATION
+//       break
+//     case 'create':
+//       headingType.value = HEADING.NEW_PROPOSAL
+//       break
+//     default:
+//       headingType.value = HEADING.PROTOCOL_PROPOSALS
+//       break
+//   }
+// }, { immediate: true })
 
-onMounted(() => {
-  window.addEventListener('scroll', onPageScroll)
-  onPageScroll()
-})
+// onMounted(() => {
+//   window.addEventListener('scroll', onPageScroll)
+//   onPageScroll()
+// })
 
-onUnmounted(() => {
-  window.removeEventListener('scroll', onPageScroll)
-})
+// onUnmounted(() => {
+//   window.removeEventListener('scroll', onPageScroll)
+// })
 </script>
 
 <style lang="scss" module>
