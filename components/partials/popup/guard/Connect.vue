@@ -1,5 +1,8 @@
 <template>
-  <PartialsPopup :size="currentStep === LOGIN_STEPS.LEDGER ? (!ledgerStatus.isFetching && ledgerAddresses.length ? 'l' : 'm') : 's'">
+  <PartialsPopup
+    :size="currentStep === LOGIN_STEPS.LEDGER ? (!ledgerStatus.isFetching && ledgerAddresses.length ? 'l' : 'm') : 's'"
+    require-button
+  >
     <template #header>
       Log in
     </template>
@@ -31,16 +34,8 @@
         <div
           v-else-if="currentStep === LOGIN_STEPS.LEDGER"
           key="ledger"
-          class="grid gap-16"
         >
-          <button
-            class="grid gap-6 grid-flow-col justify-start items-center text-grey-600 typo-ui-l transition-color duration-100 hover:text-primary"
-            @click="currentStep = LOGIN_STEPS.PICK"
-          >
-            <UtilsIcon
-              name="Chevron/Left"
-              class="w-12 h-12"
-            />
+          <button @click="currentStep = LOGIN_STEPS.PICK">
             Return
           </button>
           <transition
@@ -50,23 +45,14 @@
             <div
               v-if="!ledgerStatus.isFetching && ledgerAddresses.length"
               key="table"
-              class="grid gap-12"
             >
               <table>
                 <thead>
-                  <tr class="border-b-1 border-grey-400">
-                    <th class="pr-20 py-6 text-grey-800 text-left typo-ui-l">
-                      Id
-                    </th>
-                    <th class="px-20 py-6 text-grey-800 text-left typo-ui-l">
-                      Address
-                    </th>
-                    <th class="px-20 py-6 text-grey-800 text-left typo-ui-l">
-                      Balance
-                    </th>
-                    <th class="pl-20 py-6 text-grey-800 text-left typo-ui-l">
-                      Action
-                    </th>
+                  <tr>
+                    <th>Id</th>
+                    <th>Address</th>
+                    <th>Balance</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -74,32 +60,27 @@
                     v-for="({ id, address, balance, path, isLoading }, i) in ledgerAddresses"
                     :key="`address-${i}`"
                   >
-                    <td class="pr-20 pt-8 text-grey-700 typo-ui-m">
+                    <td class="pr-20">
                       {{ id }}
                     </td>
-                    <td class="px-20 pt-8 text-grey-700 typo-ui-m">
+                    <td class="px-20">
                       {{ truncate({ string: address, start: 12, end: 16 }) }}
                     </td>
-                    <td class="px-20 pt-8 text-grey-700 typo-ui-m">
+                    <td class="px-20">
                       {{ formatValue({ value: balance, hasSNA: true, suffix: 'ICX' }) }}
                     </td>
-                    <td class="pl-20 pt-8 text-grey-700 typo-ui-m">
-                      <ControlsButtonAction
-                        version="secondary"
-                        size="sm"
-                        @click="selectLedgerAddress(address, path)"
-                      >
+                    <td class="pl-20">
+                      <button @click="selectLedgerAddress(address, path)">
                         Select
-                      </ControlsButtonAction>
+                      </button>
                     </td>
                   </tr>
                 </tbody>
               </table>
-              <div class="grid gap-6 grid-flow-col justify-center items-center">
+              <div>
                 <button
                   v-for="page in 9"
                   :key="`paginationButton-${page}`"
-                  class="w-32 h-32 text-grey-400 bg-primary bg-opacity-0 rounded-full transition-default duration-100 hover:text-primary hover:bg-opacity-10"
                   @click="setLedgerPage(page - 1)"
                 >
                   {{ page }}
@@ -109,14 +90,14 @@
             <div
               v-else-if="!ledgerStatus.error"
               key="loading"
-              class="grid gap-6 grid-flow-col justify-between items-center px-12 py-10 text-info typo-body-bold bg-info bg-opacity-10 rounded-10"
+              class="grid gap-6 grid-flow-col justify-between items-center px-12 py-10 text-info typo-paragraph bg-info bg-opacity-10 rounded-10"
             >
               Select a Ledger address. <UtilsLoader />
             </div>
             <div
               v-else
               key="error"
-              class="px-12 py-10 text-error typo-body-bold bg-error bg-opacity-10 rounded-10"
+              class="px-12 py-10 text-error typo-paragraph bg-error bg-opacity-10 rounded-10"
             >
               {{ ledgerStatus.error }}
             </div>
@@ -132,8 +113,6 @@ import { storeToRefs } from 'pinia'
 import { useDeviceStore } from '@/stores/device'
 import { useLedgerStore } from '@/stores/ledger'
 import { formatValue, truncate } from '@/assets/scripts/helpers'
-
-const { collection } = useRuntimeConfig()
 
 const isNonDesktopWarned = useState<boolean>('isNonDesktopWarned', () => false)
 
@@ -236,8 +215,8 @@ onMounted(async () => {
     isNonDesktopWarned.value = true
 
     notify.info({
-      title: `${collection} on mobile`,
-      message: `To use ${collection} on Mobile, you have to download the MyICONWallet app and browse to this url with it.`,
+      title: 'Agora on mobile',
+      message: 'To use Agora on Mobile, you have to download the MyICONWallet app and browse to this url with it.',
       timeout: 10000,
     })
   }

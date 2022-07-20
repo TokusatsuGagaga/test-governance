@@ -1,7 +1,7 @@
 <template>
   <!-- TODO: handle errors UI -->
   <label
-    class="grid gap-12 w-full xxs:w-320"
+    class="grid gap-20"
     :class="{ [$style.hasErrors]: errors && errors.length }"
   >
     <h2 v-if="label">
@@ -120,13 +120,13 @@ const emit = defineEmits<Emits>()
 
 const props = withDefaults(defineProps<Props>(), {
   modelValue: null,
-  type: 'text',
   label: null,
+  type: 'text',
   placeholder: null,
   rows: 8,
   cols: null,
-  min: -Infinity,
-  max: Infinity,
+  min: null,
+  max: null,
 })
 
 const input = ref<HTMLInputElement | null>(null)

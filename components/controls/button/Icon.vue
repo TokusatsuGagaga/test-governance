@@ -2,25 +2,31 @@
   <component
     :is="to ? NuxtLink : 'button'"
     class="
-      grid
-      place-items-center
+      relative
+      flex
+      justify-center
+      items-center
       w-40
       h-40
-      bg-opacity-5
-      border-1
-      border-opacity-0
-      rounded-full
-      transition-border
-      duration-100
-      hover:border-opacity-100
-      focus:border-opacity-100
+      before:absolute
+      before:w-full
+      before:h-full
+      before:rounded-full
+      before:transition-transform
+      before:origin-center
+      before:duration-400
+      before:ease-reveal-xxl
+      before:content-['']
+      hover:before:scale-112.5
     "
     :class="{
-      'text-primary bg-primary border-primary': version === 'primary',
-      'text-success bg-success border-success': version === 'success',
-      'text-warning bg-warning border-warning': version === 'warning',
-      'text-error bg-error border-error': version === 'error',
-      'text-info bg-info border-info': version === 'info',
+      'text-white before:bg-primary': version === 'primary',
+      'text-white border-1 border-primary': version === 'secondary',
+      'text-success before:bg-success before:bg-opacity-25': version === 'success',
+      'text-warning before:bg-warning before:bg-opacity-25': version === 'warning',
+      'text-error before:bg-error before:bg-opacity-25': version === 'error',
+      'text-info before:bg-info before:bg-opacity-25': version === 'info',
+      'text-white border-1 border-white': version === 'neutral',
     }"
     v-bind="{
       ...$attrs,
@@ -35,7 +41,7 @@
   >
     <UtilsIcon
       :name="icon"
-      class="w-20 h-20"
+      class="relative w-20 h-20"
     />
   </component>
 </template>
@@ -46,10 +52,12 @@ import type { IconsNames } from '@/composables/useIconsComponents'
 
 type Version =
   | 'primary'
+  | 'secondary'
   | 'success'
   | 'warning'
   | 'error'
   | 'info'
+  | 'neutral'
 
 type Props = {
   version?: Version
@@ -61,9 +69,6 @@ type Props = {
 
 withDefaults(defineProps<Props>(), {
   version: 'primary',
-  to: null,
-  target: null,
-  type: null,
 })
 
 const { NuxtLink } = useNuxtLink()
