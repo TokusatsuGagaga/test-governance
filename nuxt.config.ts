@@ -7,11 +7,7 @@ const isDev = process.env.NODE_ENV === 'development'
 
 export default defineNuxtConfig({
   publicRuntimeConfig: {
-    collection: process.env.APP_COLLECTION,
-    iconNetwork: process.env.APP_ICON_NETWORK,
-    scoreAddress: process.env.APP_SCORE_ADDRESS,
-    logoHash: process.env.APP_LOGO_HASH,
-    unrevealedHash: process.env.APP_UNREVEALED_HASH,
+    iconNetwork: process.env.ICON_NETWORK,
   },
   app: {
     head: {

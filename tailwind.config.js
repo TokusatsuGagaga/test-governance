@@ -27,16 +27,11 @@ module.exports = {
       craft: '#0C9D90',
 
       grey: {
-        '000': '#F9FAFB',
+        default: '#889DBC',
         100: '#889DBC',
         200: '#3A3D5D',
         300: '#252846',
         400: '#1C1F3E',
-        500: '#6D7280',
-        600: '#4B5563',
-        700: '#374151',
-        800: '#1F2937',
-        900: '#111827',
       },
 
       success: '#52D5BA',
@@ -452,66 +447,6 @@ module.exports = {
         '.max-h-screen': { 'max-height': '100vh' },
         '.max-w-screen': { 'max-width': '100vw' },
       }, ['responsive'])
-
-      addUtilities({
-        '.typo-h1': {
-          'font-weight': '700',
-          'font-size': '30px',
-          'line-height': '36px',
-        },
-        '.typo-h2': {
-          'font-weight': '600',
-          'font-size': '16px',
-          'line-height': '19px',
-        },
-        '.typo-section': {
-          'font-weight': '400',
-          'font-size': '14px',
-          'line-height': '22px',
-        },
-        '.typo-body': {
-          'font-weight': '400',
-          'font-size': '13px',
-          'line-height': '16px',
-        },
-        '.typo-body-bold': {
-          'font-weight': '600',
-          'font-size': '13px',
-          'line-height': '16px',
-        },
-        '.typo-ui-l': {
-          'font-weight': '600',
-          'font-size': '14px',
-          'line-height': '22px',
-        },
-        '.typo-ui-m': {
-          'font-weight': '600',
-          'font-size': '12px',
-          'line-height': '22px',
-        },
-        '.typo-ui-s': {
-          'font-weight': '600',
-          'font-size': '10px',
-          'line-height': '18px',
-        },
-        '.typo-capital': {
-          'font-weight': '500',
-          'font-size': '12px',
-          'line-height': '15px',
-          'letter-spacing': '0.02em',
-          'text-transform': 'uppercase',
-        },
-        '.typo-caption': {
-          'font-weight': '400',
-          'font-size': '11px',
-          'line-height': '13px',
-        },
-        '.typo-caption-semibold': {
-          'font-weight': '600',
-          'font-size': '11px',
-          'line-height': '13px',
-        },
-      })
     }),
   ],
   content: [
