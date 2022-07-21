@@ -1,6 +1,5 @@
 <template>
-  <div />
-  <!-- <Container class="grid gap-40 py-24">
+  <Container class="grid gap-40 py-24">
     <nuxt-link
       :to="{ name: 'index' }"
       class="grid gap-6 grid-flow-col items-center justify-self-start text-grey-100 typo-button-s transition-color duration-200 hover:text-white"
@@ -63,45 +62,44 @@
         abstain: 0,
       }"
     />
-  </Container> -->
+  </Container>
 </template>
 
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
-// import useVuelidate from '@vuelidate/core'
-// import { required, url } from '@vuelidate/validators'
-// import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+import useVuelidate from '@vuelidate/core'
+import { required, url } from '@vuelidate/validators'
+import { useUserStore } from '@/stores/user'
 
-// type FormStates = {
-//   title: string
-//   description: string
-//   discussion: string
-// }
+type FormStates = {
+  title: string
+  description: string
+  discussion: string
+}
 
-// type FormValidators =
-//   | typeof required
-//   | typeof url
+type FormValidators =
+  | typeof required
+  | typeof url
 
-// type FormRules = {
-//   [key in keyof FormStates]: Record<string, FormValidators>
-// }
+type FormRules = {
+  [key in keyof FormStates]: Record<string, FormValidators>
+}
 
-// const createIsPreviewing = useState<boolean>('create-is-previewing', () => false)
+const createIsPreviewing = useState<boolean>('create-is-previewing', () => false)
 
-// const userStore = useUserStore()
-// const { address, truncatedAddress } = storeToRefs(userStore)
+const { address, truncatedAddress } = storeToRefs(useUserStore())
 
-// const uid = ref<string>(Date.now().toString(36) + Math.random().toString(36).split('.')[1])
+const uid = ref<string>(Date.now().toString(36) + Math.random().toString(36).split('.')[1])
 
-// const formStates = reactive<FormStates>({
-//   title: null,
-//   description: null,
-//   discussion: null,
-// })
+const formStates = reactive<FormStates>({
+  title: null,
+  description: null,
+  discussion: null,
+})
 
-// const v$ = useVuelidate<FormStates, FormRules>({
-//   title: { required },
-//   description: {},
-//   discussion: { url },
-// }, formStates)
+const v$ = useVuelidate<FormStates, FormRules>({
+  title: { required },
+  description: {},
+  discussion: { url },
+}, formStates)
 </script>

@@ -1,6 +1,5 @@
 <template>
-  <div />
-  <!-- <Container class="grid gap-40 py-24">
+  <Container class="grid gap-40 py-24">
     <nuxt-link
       :to="{ name: 'index' }"
       class="grid gap-6 grid-flow-col items-center justify-self-start text-grey-100 typo-button-s transition-color duration-200 hover:text-white"
@@ -70,27 +69,27 @@
         </div>
       </div>
     </client-only>
-  </Container> -->
+  </Container>
 </template>
 
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
-// import { useProposalsStore } from '@/stores/proposals'
-// import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+import { useProposalsStore } from '@/stores/proposals'
+import { useUserStore } from '@/stores/user'
 
-// const { currentProposal } = storeToRefs(useProposalsStore())
-// const { isLoggedIn } = useUserStore()
+const { currentProposal } = storeToRefs(useProposalsStore())
+const { isLoggedIn } = useUserStore()
 
-// type Results = {
-//   [choice in keyof typeof currentProposal.value.votes]: {
-//     choice: string
-//     count: number
-//     ratio: number
-//   }
-// }
+type Results = {
+  [choice in keyof typeof currentProposal.value.votes]: {
+    choice: string
+    count: number
+    ratio: number
+  }
+}
 
-// const resultsVotes = computed<Results>(() => {
-//   const totalCounts = Object.values(currentProposal.value.votes).reduce((accu, curr) => accu + curr, 0)
-//   return Object.entries(currentProposal.value.votes).reduce((accu, [choice, count]) => ({ ...accu, [choice]: { choice, count, ratio: count / totalCounts } }), {}) as Results
-// })
+const resultsVotes = computed<Results>(() => {
+  const totalCounts = Object.values(currentProposal.value.votes).reduce((accu, curr) => accu + curr, 0)
+  return Object.entries(currentProposal.value.votes).reduce((accu, [choice, count]) => ({ ...accu, [choice]: { choice, count, ratio: count / totalCounts } }), {}) as Results
+})
 </script>

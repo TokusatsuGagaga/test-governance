@@ -1,6 +1,5 @@
 <template>
-  <div />
-  <!-- <Container class="grid gap-24 py-32">
+  <Container class="grid gap-24 py-32">
     <h1 class="text-white typo-title-m">
       Proposals
     </h1>
@@ -18,12 +17,12 @@
         </nuxt-link>
       </div>
     </client-only>
-  </Container> -->
+  </Container>
 </template>
 
 <script setup lang="ts">
-// import { storeToRefs } from 'pinia'
-// import { useProposalsStore } from '@/stores/proposals'
+import { storeToRefs } from 'pinia'
+import { useProposalsStore } from '@/stores/proposals'
 
-// const { proposals } = storeToRefs(useProposalsStore())
+const { proposals } = storeToRefs(useProposalsStore())
 </script>

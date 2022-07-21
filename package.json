@@ -1,7 +1,7 @@
 {
-  "name": "staky-nuxt3-starter",
+  "name": "test-nuxt-3-vercel",
   "version": "0.0.1",
-  "description": "Nuxt 3 starter by Staky",
+  "description": "Nuxt 3",
   "author": "Staky",
   "private": true,
   "scripts": {

@@ -4,7 +4,7 @@
     :class="[
       $style.container,
       {
-        'pb-20': title && !message,
+        'pb-20': message,
       }
     ]"
     class="grid gap-10 grid-cols-auto-1fr p-10 bg-grey-300 rounded-5 shadow after:text-primary"

@@ -34,8 +34,16 @@
         <div
           v-else-if="currentStep === LOGIN_STEPS.LEDGER"
           key="ledger"
+          class="grid gap-10"
         >
-          <button @click="currentStep = LOGIN_STEPS.PICK">
+          <button
+            class="grid gap-4 grid-flow-col items-center justify-self-start typo-button-s group"
+            @click="currentStep = LOGIN_STEPS.PICK"
+          >
+            <UtilsIcon
+              name="Chevron/Left"
+              class="w-12 h-12 mt-2 group-hover:-translate-x-2"
+            />
             Return
           </button>
           <transition
